@@ -1,4 +1,4 @@
-name: 'Local Cache'
+name: 'Self-Hosted Local Cache'
 description: "Github Action to save and restore files across job runs on self-hosted runner"
 
 inputs:
