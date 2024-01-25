@@ -1,5 +1,5 @@
-name: 'Self-Hosted Local Cache'
-description: "Github Action to save and restore files across job runs on self-hosted runner"
+name: 'Local Cache on Self-Hosted'
+description: 'Cache dependencies and build outputs to improve workflow execution time on self hosted machine'
 
 inputs:
   TARGET_PATH:

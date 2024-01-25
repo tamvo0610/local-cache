@@ -1,6 +1,6 @@
-# Self-Hosted Local Cache
+# Local Cache on Self-Hosted
 
-## Github Action to save and restore files across job runs on self-hosted runner.
+## Cache dependencies and build outputs to improve workflow execution time on self hosted machine.
 
 ## Usage
 
