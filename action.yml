@@ -34,15 +34,15 @@ runs:
       shell: bash
       run: |
         if [[ -z "${{ inputs.path }}" ]]; then
-          echo "===== INFO: Path is required"
+          echo "===== INFO: Path is required and not be empty"
           exit 1
         fi
         if [[ -z "${{ inputs.cache-key }}" ]]; then
-          echo "===== INFO: Cache Key is required"
+          echo "===== INFO: Cache Key is required and not be empty"
           exit 1
         fi
         if [[ -z "${{ inputs.cache-dir }}" ]]; then
-          echo "===== INFO: Cache Dir is required"
+          echo "===== INFO: Cache Dir is required and not be empty"
           exit 1
         fi
 
