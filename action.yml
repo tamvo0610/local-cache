@@ -25,10 +25,6 @@ branding:
 
 runs:
   using: 'composite'
-  post:
-    - shell: bash
-      run: source ${{ github.action_path }}/post.sh
-
   steps:
     - name: Check Inputs Provie
       shell: bash
