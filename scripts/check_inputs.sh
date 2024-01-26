@@ -9,16 +9,16 @@ CACHE_DIR=${inputs[3]}
 CACHE_PATH=${inputs[4]}
 
 if [[ -z "${TARGET_PATH}" ]]; then
-  echo "===== INFO: path is required but was not provided."
+  echo "===== INFO: Path is required and not be empty."
   exit 1
 fi
 
 if [[ -z "${CACHE_KEY}" ]]; then
-  echo "===== INFO: cache-key is required but was not provided."
+  echo "===== INFO: Cache Key is required and not be empty."
   exit 1
 fi
 
 if [[ -z "${CACHE_DIR}" ]]; then
-  echo "===== INFO: cache-dir is required but was not provided."
+  echo "===== INFO: Cache Dir is required and not be empty."
   exit 1
 fi

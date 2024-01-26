@@ -26,23 +26,7 @@ branding:
 runs:
   using: 'composite'
   steps:
-    - name: Check Inputs Provie
-      shell: bash
-      run: |
-        if [[ -z "${{ inputs.path }}" ]]; then
-          echo "===== INFO: Path is required and not be empty"
-          exit 1
-        fi
-        if [[ -z "${{ inputs.cache-key }}" ]]; then
-          echo "===== INFO: Cache Key is required and not be empty"
-          exit 1
-        fi
-        if [[ -z "${{ inputs.cache-dir }}" ]]; then
-          echo "===== INFO: Cache Dir is required and not be empty"
-          exit 1
-        fi
-
-    - name: Create Inputs File
+    - name: Store Inputs Variable
       shell: bash
       id: inputs_file
       run: |
@@ -53,6 +37,10 @@ runs:
         echo "${{ inputs.cache-dir }}" >> $FILE_PATH
         echo "${{ inputs.cache-dir }}/${{ inputs.cache-key }}" >> $FILE_PATH
         echo "path=$FILE_PATH" >> "$GITHUB_OUTPUT"
+
+    - name: Check Inputs Proviede
+      shell: bash
+      run: source ${{ github.action_path }}/scripts/check_inputs.sh ${{ steps.inputs_file.outputs.path }}
 
     - name: Cache Restore
       shell: bash
