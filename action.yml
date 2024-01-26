@@ -2,16 +2,16 @@ name: 'Local Cache on Self-Hosted'
 description: 'Cache dependencies and build outputs to improve workflow execution time on self hosted machine'
 
 inputs:
-  TARGET_PATH:
+  path:
     description: 'File or folder to be cached'
     required: true
-  TARGET_ACTION:
+  action:
     description: 'Action will be run if cache not found'
     required: true
-  CACHE_KEY:
+  cache-key:
     description: 'Explicit key for versioning the cache'
     required: true
-  CACHE_PATH:
+  cache-dir:
     description: 'Path dir will cache'
     required: true
   
@@ -25,17 +25,37 @@ branding:
 
 runs:
   using: 'composite'
+  post:
+    - shell: bash
+      run: source ${{ github.action_path }}/post.sh
+
   steps:
+    - name: Check Inputs Provie
+      shell: bash
+      run: |
+        if [[ -z "${{ inputs.path }}" ]]; then
+          echo "===== INFO: Path is required"
+          exit 1
+        fi
+        if [[ -z "${{ inputs.cache-key }}" ]]; then
+          echo "===== INFO: Cache Key is required"
+          exit 1
+        fi
+        if [[ -z "${{ inputs.cache-dir }}" ]]; then
+          echo "===== INFO: Cache Dir is required"
+          exit 1
+        fi
+
     - name: Create Inputs File
       shell: bash
       id: inputs_file
       run: |
         FILE_PATH=${{ github.action_path }}/inputs.txt
-        echo "${{ inputs.TARGET_PATH }}" > $FILE_PATH
-        echo "${{ inputs.TARGET_ACTION }}" >> $FILE_PATH
-        echo "${{ inputs.CACHE_KEY }}" >> $FILE_PATH
-        echo "${{ inputs.CACHE_PATH }}" >> $FILE_PATH
-        echo "${{ inputs.CACHE_PATH }}/${{ inputs.CACHE_KEY }}" >> $FILE_PATH
+        echo "${{ inputs.path }}" > $FILE_PATH
+        echo "${{ inputs.action }}" >> $FILE_PATH
+        echo "${{ inputs.cache-key }}" >> $FILE_PATH
+        echo "${{ inputs.cache-dir }}" >> $FILE_PATH
+        echo "${{ inputs.cache-dir }}/${{ inputs.cache-key }}" >> $FILE_PATH
         echo "path=$FILE_PATH" >> "$GITHUB_OUTPUT"
 
     - name: Cache Restore
