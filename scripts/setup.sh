@@ -1,13 +1,4 @@
-inputs=()
-while IFS= read -r line; do
-  inputs+=("$line")
-done < $TEMPORARY_ACTION_FILE
-
-TARGET_PATH=${inputs[0]}
-TARGET_ACTION=${inputs[1]}
-CACHE_KEY=${inputs[2]}
-CACHE_DIR=${inputs[3]}
-CACHE_PATH=${inputs[4]}
+#!/bin/bash
 
 if [[ -z "${TARGET_PATH}" ]]; then
   echo "===== INFO: Path is required and not be empty."
@@ -20,6 +11,8 @@ if [[ -z "${CACHE_KEY}" ]]; then
 fi
 
 if [[ -z "${CACHE_DIR}" ]]; then
-  echo "===== INFO: Cache Dir is required and not be empty."
+  echo "===== INFO: Cache Dir is required and must not be empty."
   exit 1
 fi
+
+echo "CACHE_PATH=${CACHE_DIR}/${CACHE_KEY}" >> $GITHUB_ENV

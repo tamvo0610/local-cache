@@ -1,1 +1,0 @@
-rm -rf $TEMPORARY_ACTION_FILE

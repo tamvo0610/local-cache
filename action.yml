@@ -26,30 +26,28 @@ branding:
 runs:
   using: 'composite'
   steps:
-    - name: Store Inputs Value
+    - name: Cache Environment Config
       shell: bash
-      id: inputs_file
       run: |
         echo "TARGET_PATH=${{ inputs.path }}" >> $GITHUB_ENV
         echo "TARGET_ACTION=${{ inputs.action }}" >> $GITHUB_ENV
         echo "CACHE_KEY=${{ inputs.cache-key }}" >> $GITHUB_ENV
         echo "CACHE_DIR=${{ inputs.cache-dir }}" >> $GITHUB_ENV
-        # echo "CACHE_PATH=${{ inputs.cache-dir }}/${{ inputs.cache-key }}" >> $GITHUB_ENV
 
-    - name: Check Inputs Value
+    - name: Cache Variables Check
       shell: bash
       run: source ${{ github.action_path }}/scripts/setup.sh
 
     - name: Cache Restore
       shell: bash
-      id: check_cache
+      id: cache-hit
       run: source ${{ github.action_path }}/scripts/restore.sh
 
     - name: Cache Action
       shell: bash
-      id: cache_action 
-      run:
+      if: steps.cache-hit.outputs.cache-hit == 'false'
+      run: source ${{ github.action_path }}/scripts/action.sh
 
-    - name: Clean Workflow
+    - name: Cache Save
       shell: bash
-      run: source ${{ github.action_path }}/scripts/clean.sh
+      run: source ${{ github.action_path }}/scripts/save.sh
