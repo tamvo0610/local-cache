@@ -8,7 +8,7 @@ CACHE_KEY=${inputs[2]}
 CACHE_DIR=${inputs[3]}
 CACHE_PATH=${inputs[4]}
 
-echo "=====eqwewfwefeeqweeq $target_path"
+echo "=====eqwewfwefeeqweeq $INPUT_FILE_PATH"
 
 echo ===== TARGET PATH: $TARGET_PATH
 echo ===== CACHE PATH: $CACHE_PATH

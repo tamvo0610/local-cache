@@ -14,9 +14,6 @@ inputs:
   cache-dir:
     description: 'Path dir will cache'
     required: true
-
-env:
-  INPUT_FILE_PATH: ${{ github.workspace }}/inputs.txt
   
 outputs:
   cache-hit:
@@ -39,7 +36,7 @@ runs:
         echo "${{ inputs.cache-key }}" >> $FILE_PATH
         echo "${{ inputs.cache-dir }}" >> $FILE_PATH
         echo "${{ inputs.cache-dir }}/${{ inputs.cache-key }}" >> $FILE_PATH
-        echo "======= TEST: ${{ env.INPUT_FILE_PATH }}"
+        echo "INPUT_FILE_PATH=$(pwd)/inputs.txt" >> $GITHUB_ENV
         echo "path=$FILE_PATH" >> "$GITHUB_OUTPUT"
 
     - name: Check Inputs Value
