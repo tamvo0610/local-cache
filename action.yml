@@ -26,11 +26,15 @@ branding:
 runs:
   using: 'composite'
   steps:
+    - name: Check Input Path
+      shell: bash
+      run: source ${{ github.action_path }}/scripts/check_input_path.sh ${{inputs.path}}
+
     - name: Store Inputs Variable
       shell: bash
       id: inputs_file
       run: |
-        FILE_PATH=${{ github.action_path }}/inputs.txt
+        FILE_PATH=$(pwd)/inputs.txt
         echo "${{ inputs.path }}" > $FILE_PATH
         echo "${{ inputs.action }}" >> $FILE_PATH
         echo "${{ inputs.cache-key }}" >> $FILE_PATH
@@ -41,9 +45,9 @@ runs:
 
     - name: Test
       shell: bash
-      run: source ${{ github.action_path }}/scripts/test.sh ${{inputs}}
+      run: source ${{ github.action_path }}/scripts/test.sh '${{ toJson(inputs) }}'
 
-    - name: Check Inputs Proviede
+    - name: Check Inputs Provide
       shell: bash
       run: source ${{ github.action_path }}/scripts/check_inputs.sh ${{ steps.inputs_file.outputs.path }}
 
