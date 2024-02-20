@@ -14,6 +14,9 @@ inputs:
   cache-dir:
     description: 'Path dir will cache'
     required: true
+
+env:
+  INPUT_FILE_PATH: $(pwd)/inputs.txt
   
 outputs:
   cache-hit:
@@ -26,11 +29,7 @@ branding:
 runs:
   using: 'composite'
   steps:
-    - name: Check Input Path
-      shell: bash
-      run: source ${{ github.action_path }}/scripts/check_input_path.sh ${{inputs.path}}
-
-    - name: Store Inputs Variable
+    - name: Store Inputs Value
       shell: bash
       id: inputs_file
       run: |
@@ -40,14 +39,10 @@ runs:
         echo "${{ inputs.cache-key }}" >> $FILE_PATH
         echo "${{ inputs.cache-dir }}" >> $FILE_PATH
         echo "${{ inputs.cache-dir }}/${{ inputs.cache-key }}" >> $FILE_PATH
+        echo "======= TEST: ${{ env.GLOBAL_VAR }}"
         echo "path=$FILE_PATH" >> "$GITHUB_OUTPUT"
 
-
-    - name: Test
-      shell: bash
-      run: source ${{ github.action_path }}/scripts/test.sh '${{ toJson(inputs) }}'
-
-    - name: Check Inputs Provide
+    - name: Check Inputs Value
       shell: bash
       run: source ${{ github.action_path }}/scripts/check_inputs.sh ${{ steps.inputs_file.outputs.path }}
 
