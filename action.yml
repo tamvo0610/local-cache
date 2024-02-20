@@ -25,6 +25,7 @@ branding:
 
 runs:
   using: 'composite'
+  s: 'docker'
   env:
     TARGET_PATH: ${{ inputs.path }}
     TARGET_ACTION: ${{ inputs.action }}
@@ -36,13 +37,11 @@ runs:
       shell: bash
       id: inputs_file
       run: |
-        FILE_PATH=$(pwd)/inputs.txt
-        echo "${{ inputs.path }}" > $FILE_PATH
-        echo "${{ inputs.action }}" >> $FILE_PATH
-        echo "${{ inputs.cache-key }}" >> $FILE_PATH
-        echo "${{ inputs.cache-dir }}" >> $FILE_PATH
-        echo "${{ inputs.cache-dir }}/${{ inputs.cache-key }}" >> $FILE_PATH
-        echo "TEMPORARY_ACTION_FILE=$FILE_PATH" >> $GITHUB_ENV
+        echo "TARGET_PATH=${{ inputs.path }}" >> $GITHUB_ENV
+        echo "TARGET_ACTION=${{ inputs.action }}" >> $GITHUB_ENV
+        echo "CACHE_KEY=${{ inputs.cache-key }}" >> $GITHUB_ENV
+        echo "CACHE_DIR=${{ inputs.cache-dir }}" >> $GITHUB_ENV
+        echo "CACHE_PATH=${{ inputs.cache-dir }}/${{ inputs.cache-key }}" >> $GITHUB_ENV
 
     - name: Check Inputs Value
       shell: bash
