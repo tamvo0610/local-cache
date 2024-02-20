@@ -38,6 +38,11 @@ runs:
         echo "${{ inputs.cache-dir }}/${{ inputs.cache-key }}" >> $FILE_PATH
         echo "path=$FILE_PATH" >> "$GITHUB_OUTPUT"
 
+
+    - name: Test
+      shell: bash
+      run: source ${{ github.action_path }}/scripts/test.sh
+
     - name: Check Inputs Proviede
       shell: bash
       run: source ${{ github.action_path }}/scripts/check_inputs.sh ${{ steps.inputs_file.outputs.path }}
