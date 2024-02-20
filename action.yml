@@ -31,12 +31,13 @@ runs:
       id: inputs_file
       run: |
         FILE_PATH=$(pwd)/inputs.txt
+        echo "====TEST: ${{ github.run_numer }}"
         echo "${{ inputs.path }}" > $FILE_PATH
         echo "${{ inputs.action }}" >> $FILE_PATH
         echo "${{ inputs.cache-key }}" >> $FILE_PATH
         echo "${{ inputs.cache-dir }}" >> $FILE_PATH
         echo "${{ inputs.cache-dir }}/${{ inputs.cache-key }}" >> $FILE_PATH
-        echo "TEMPORARY_FILE=$FILE_PATH" >> $GITHUB_ENV
+        echo "TEMPORARY__FILE=$FILE_PATH" >> $GITHUB_ENV
 
     - name: Check Inputs Value
       shell: bash
