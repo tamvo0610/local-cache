@@ -30,24 +30,22 @@ runs:
       shell: bash
       id: inputs_file
       run: |
-        FILE_PATH=$(pwd)/inputs.txt
-        echo "${{ inputs.path }}" > $FILE_PATH
-        echo "${{ inputs.action }}" >> $FILE_PATH
-        echo "${{ inputs.cache-key }}" >> $FILE_PATH
-        echo "${{ inputs.cache-dir }}" >> $FILE_PATH
-        echo "${{ inputs.cache-dir }}/${{ inputs.cache-key }}" >> $FILE_PATH
-        echo "INPUT_FILE_PATH=$(pwd)/inputs.txt" >> $GITHUB_ENV
-        echo "path=$FILE_PATH" >> "$GITHUB_OUTPUT"
+        echo "TEMPORARY_FILE=$(pwd)/inputs.txt" >> $GITHUB_ENV
+        echo "${{ inputs.path }}" > $TEMPORARY_FILE
+        echo "${{ inputs.action }}" >> $TEMPORARY_FILE
+        echo "${{ inputs.cache-key }}" >> $TEMPORARY_FILE
+        echo "${{ inputs.cache-dir }}" >> $TEMPORARY_FILE
+        echo "${{ inputs.cache-dir }}/${{ inputs.cache-key }}" >> $TEMPORARY_FILE
 
     - name: Check Inputs Value
       shell: bash
-      run: source ${{ github.action_path }}/scripts/check_inputs.sh ${{ steps.inputs_file.outputs.path }}
+      run: source ${{ github.action_path }}/scripts/check_inputs.sh
 
     - name: Cache Restore
       shell: bash
       id: check_cache
-      run: source ${{ github.action_path }}/entrypoint.sh ${{ steps.inputs_file.outputs.path }}
+      run: source ${{ github.action_path }}/entrypoint.sh
 
     - name: Clean Inputs File
       shell: bash
-      run: rm -rf ${{ steps.inputs_file.outputs.path }}
+      run: rm -rf ${{ env.TEMPORARY_FILE }}

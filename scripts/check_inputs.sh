@@ -1,7 +1,8 @@
 inputs=()
 while IFS= read -r line; do
   inputs+=("$line")
-done < $1
+done < $TEMPORARY_FILE
+
 TARGET_PATH=${inputs[0]}
 TARGET_ACTION=${inputs[1]}
 CACHE_KEY=${inputs[2]}
