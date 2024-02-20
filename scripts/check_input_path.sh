@@ -11,10 +11,11 @@
 # CACHE_PATH=${inputs[4]}
 
 if [[ -z "${1}" ]]; then
-  echo "===== INFO: Path is required and not be empty."
-  exit 1
+    echo "===== INFO: Path is required and not be empty."
+    exit 1
+else
+    export target_path=$1
 fi
-export target_path=$1
 # if [[ -z "${CACHE_KEY}" ]]; then
 #   echo "===== INFO: Cache Key is required and not be empty."
 #   exit 1
