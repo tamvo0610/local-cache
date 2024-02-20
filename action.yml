@@ -16,7 +16,7 @@ inputs:
     required: true
 
 env:
-  INPUT_FILE_PATH: $(pwd)/inputs.txt
+  INPUT_FILE_PATH: ${{ github.workspace }}/inputs.txt
   
 outputs:
   cache-hit:
