@@ -41,7 +41,7 @@ runs:
 
     - name: Test
       shell: bash
-      run: source ${{ github.action_path }}/scripts/test.sh ${{inputs}}
+      run: source ${{ github.action_path }}/scripts/test.sh ${{ toJson(inputs) }}
 
     - name: Check Inputs Proviede
       shell: bash
