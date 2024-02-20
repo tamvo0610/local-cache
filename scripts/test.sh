@@ -2,7 +2,7 @@ echo "===== Test Value: $1"
 # inputs=$1
 # echo "$inputs" | jq ".path"
 
-inputs_json=$(echo $1 | jq -r '.')
+inputs_json=$(echo "$1" | jq -r '.')
 path_value=$(echo "$inputs_json" | jq -r '.path')
 action_value=$(echo "$inputs_json" | jq -r '.action')
 cache_key_value=$(echo "$inputs_json" | jq -r '.cache-key')
