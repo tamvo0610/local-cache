@@ -30,12 +30,13 @@ runs:
       shell: bash
       id: inputs_file
       run: |
-        echo "TEMPORARY_FILE=$(pwd)/inputs.txt" >> $GITHUB_ENV
-        echo "${{ inputs.path }}" > $TEMPORARY_FILE
-        echo "${{ inputs.action }}" >> $TEMPORARY_FILE
-        echo "${{ inputs.cache-key }}" >> $TEMPORARY_FILE
-        echo "${{ inputs.cache-dir }}" >> $TEMPORARY_FILE
-        echo "${{ inputs.cache-dir }}/${{ inputs.cache-key }}" >> $TEMPORARY_FILE
+        FILE_PATH=$(pwd)/inputs.txt
+        echo "${{ inputs.path }}" > $FILE_PATH
+        echo "${{ inputs.action }}" >> $FILE_PATH
+        echo "${{ inputs.cache-key }}" >> $FILE_PATH
+        echo "${{ inputs.cache-dir }}" >> $FILE_PATH
+        echo "${{ inputs.cache-dir }}/${{ inputs.cache-key }}" >> $FILE_PATH
+        echo "TEMPORARY_FILE=$FILE_PATH" >> $GITHUB_ENV
 
     - name: Check Inputs Value
       shell: bash
