@@ -45,7 +45,7 @@ runs:
 
     - name: Cache Action
       shell: bash
-      if: steps.cache-hit.outputs.cache-hit == 'false'
+      if: steps.cache-hit.outputs.cache-hit != 'true'
       run: source ${{ github.action_path }}/scripts/action.sh
 
     - name: Cache Save
