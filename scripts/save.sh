@@ -4,5 +4,5 @@ else
   echo "===== INFO: Cache not exist, save cache"
   mkdir -p $CACHE_PATH
   rsync -a $TARGET_PATH/ $CACHE_PATH
-  echo "===== INFO: Cache save success
+  echo "===== INFO: Cache save success"
 fi
