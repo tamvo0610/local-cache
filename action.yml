@@ -39,7 +39,7 @@ runs:
         echo "${{ inputs.cache-key }}" >> $FILE_PATH
         echo "${{ inputs.cache-dir }}" >> $FILE_PATH
         echo "${{ inputs.cache-dir }}/${{ inputs.cache-key }}" >> $FILE_PATH
-        echo "======= TEST: ${{ env.GLOBAL_VAR }}"
+        echo "======= TEST: ${{ env.INPUT_FILE_PATH }}"
         echo "path=$FILE_PATH" >> "$GITHUB_OUTPUT"
 
     - name: Check Inputs Value
