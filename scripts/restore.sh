@@ -1,12 +1,15 @@
 inputs=()
 while IFS= read -r line; do
   inputs+=("$line")
-done < $1
+done < $TEMPORARY_ACTION_FILE
+
 TARGET_PATH=${inputs[0]}
 TARGET_ACTION=${inputs[1]}
 CACHE_KEY=${inputs[2]}
 CACHE_DIR=${inputs[3]}
 CACHE_PATH=${inputs[4]}
+
+echo "=====eqwewfwefeeqweeq $INPUT_FILE_PATH"
 
 echo ===== TARGET PATH: $TARGET_PATH
 echo ===== CACHE PATH: $CACHE_PATH
@@ -18,7 +21,6 @@ if [ -d $CACHE_PATH ]; then
   rsync -a $CACHE_PATH/ $TARGET_PATH
   echo "===== INFO: Restore Cache Success"
   echo "cache_exist=true" >> "$GITHUB_OUTPUT"
-  exit 0
 else
   echo "===== INFO: Cache doesn't exist"
   echo "===== INFO: Install Cache"
