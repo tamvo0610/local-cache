@@ -1,10 +1,9 @@
 #!/bin/bash
-FILE_PATH=$(pwd)/inputs.txt
 
 inputs=()
 while IFS= read -r line; do
   inputs+=("$line")
-done < $FILE_PATH
+done < $CACHE_FILE_PATH
 
 TARGET_PATH=${inputs[0]}
 TARGET_ACTION=${inputs[1]}

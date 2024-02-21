@@ -35,6 +35,7 @@ runs:
         echo "${{ inputs.cache-key }}" >> $FILE_PATH
         echo "${{ inputs.cache-dir }}" >> $FILE_PATH
         echo "${{ inputs.cache-dir }}/${{ inputs.cache-key }}" >> $FILE_PATH
+        echo "CACHE_FILE_PATH=$FILE_PATH" >> $GITHUB_ENV
 
     - name: Cache Variables Check
       shell: bash

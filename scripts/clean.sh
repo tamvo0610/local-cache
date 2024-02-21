@@ -1,3 +1,3 @@
-FILE_PATH=$(pwd)/inputs.txt
+#!/bin/bash
 
-rm -rf $FILE_PATH
+rm -rf $CACHE_FILE_PATH
