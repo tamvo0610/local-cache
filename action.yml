@@ -26,13 +26,15 @@ branding:
 runs:
   using: 'composite'
   steps:
-    - name: Cache Environment Config
+    - name: Cache Variables Config
       shell: bash
       run: |
-        echo "TARGET_PATH=${{ inputs.path }}" >> $GITHUB_ENV
-        echo "TARGET_ACTION=${{ inputs.action }}" >> $GITHUB_ENV
-        echo "CACHE_KEY=${{ inputs.cache-key }}" >> $GITHUB_ENV
-        echo "CACHE_DIR=${{ inputs.cache-dir }}" >> $GITHUB_ENV
+        FILE_PATH=$(pwd)/inputs.txt
+        echo "${{ inputs.TARGET_PATH }}" > $FILE_PATH
+        echo "${{ inputs.TARGET_ACTION }}" >> $FILE_PATH
+        echo "${{ inputs.CACHE_KEY }}" >> $FILE_PATH
+        echo "${{ inputs.CACHE_PATH }}" >> $FILE_PATH
+        echo "${{ inputs.CACHE_PATH }}/${{ inputs.CACHE_KEY }}" >> $FILE_PATH
 
     - name: Cache Variables Check
       shell: bash
@@ -51,3 +53,7 @@ runs:
     - name: Cache Save
       shell: bash
       run: source ${{ github.action_path }}/scripts/save.sh
+
+    - name: Clean Action
+      shell: bash
+      run: source ${{ github.action_path }}/scripts/clean.sh
