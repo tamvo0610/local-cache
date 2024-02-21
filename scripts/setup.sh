@@ -28,5 +28,3 @@ if [[ -z "${CACHE_DIR}" ]]; then
   rm -rf $FILE_PATH
   exit 1
 fi
-
-echo "CACHE_PATH=${CACHE_DIR}/${CACHE_KEY}" >> $GITHUB_ENV
